@@ -1,0 +1,21 @@
+.add-section {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+form {
+  border: 3px solid #0d6efd;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.show {
+  display: block;
+}
+
+textarea {
+  margin-top: 10px;
+}

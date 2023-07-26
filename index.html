@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notes App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <button class="add-btn">Create note</button>
+    <div class="add-section">
+      <form class="form">
+        <div>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Enter your note..."
+          />
+          <select name="category" id="category">
+            <option value="Task">Task</option>
+            <option value="Random Thought">Random Thought</option>
+            <option value="Idea">Idea</option>
+          </select>
+        </div>
+        <textarea
+          name="content"
+          id="content"
+          cols="40"
+          rows="7"
+          placeholder="Enter your content..."
+        ></textarea>
+        <button type="submit">Add</button>
+      </form>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
