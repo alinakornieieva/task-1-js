@@ -30,6 +30,17 @@ export let data = [
     }
 ]
 
+export const defineIcon = (category) => {
+    switch (category) {
+        case 'Task':
+            return 'fa-cart-shopping'
+        case 'Random Thought':
+            return 'fa-head-side-virus'
+        case 'Idea':
+            return 'fa-lightbulb'
+    }
+}
+
 export const addNewNote = (newNote) => {
     return data = [...data, newNote]
 }
@@ -44,4 +55,18 @@ export const archiveNote = (id) => {
     })
     data[index].archived = !data[index].archived
     return data
+}
+
+export const findNote = (id) => {
+    const index = data.findIndex(item => {
+        if (item.id == id) return true
+    })
+    return data[index]
+}
+
+export const updateNote = (id, name, content, dates, category) => {
+    const index = data.findIndex(item => {
+        if (item.id == id) return true
+    })
+    data[index] = { ...data[index], name, content, dates, category }
 }

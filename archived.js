@@ -1,4 +1,4 @@
-import { data, archiveNote } from "./data.js"
+import { data, archiveNote, defineIcon } from "./data.js"
 import { displayData } from "./app.js"
 const archivedTable = document.querySelector('.archived')
 const tbodyArchived = document.querySelector('#tbody_archived')
@@ -21,7 +21,7 @@ export const displayArchived = () => {
     displayedData = displayedData.map(({ id, name, created, category, content, dates }) =>
         `
         <tr>
-            <th scope="row">${name}</th>
+            <th scope="row"><i class="fa-solid ${defineIcon(category)}"></i> ${name}</th>
             <td>${created}</td>
             <td>${category}</td>
             <td>${content}</td>

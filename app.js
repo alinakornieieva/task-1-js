@@ -1,4 +1,4 @@
-import { data, addNewNote, deleteNote, archiveNote } from "./data.js"
+import { data, addNewNote, deleteNote, archiveNote, updateNote, findNote, defineIcon } from "./data.js"
 import { displayArchived } from "./archived.js"
 
 const addBtn = document.querySelector('.add-btn')
@@ -10,12 +10,13 @@ const category = document.querySelector('#category')
 const tbodyFirst = document.querySelector('#tbody_first')
 const tbodySecond = document.querySelector('#tbody_second')
 const table = document.querySelector('.main-table')
+let edit = false
 
 export const displayData = () => {
     let displayedData = data.filter((item) => !item.archived)
     displayedData = displayedData.map(({ id, name, created, category, content, dates }) =>
         `<tr>
-            <th scope="row">${name}</th>
+            <th scope="row"><i class="fa-solid ${defineIcon(category)}"></i> ${name}</th>
             <td>${created}</td>
             <td>${category}</td>
             <td>${content}</td>
@@ -34,7 +35,7 @@ export const displayData = () => {
         const archived = data.filter((cur) => cur.category === item && cur.archived).length
         if (active > 0 || archived > 0) {
             tbodySecond.insertAdjacentHTML('beforeend', `<tr>
-            <th scope="row">${item}</th>
+            <th scope="row"><i class="fa-solid ${defineIcon(item)}"></i> ${item}</th>
             <td>${active}</td>
             <td>${archived}</td>
         </tr>`)
@@ -59,16 +60,18 @@ table.addEventListener('click', (e) => {
         archiveNote(e.target.parentElement.id)
         displayData()
         displayArchived()
-
     }
     if (e.target.hasAttribute('data-edit')) {
-        deleteNote(e.target.parentElement.id)
+        addSection.classList.add('show')
+        const current = findNote(e.target.parentElement.id)
+        name.value = current.name
+        content.value = current.content
+        category.value = current.category
+        edit = e.target.parentElement.id
         displayData()
         displayArchived()
-
     }
 })
-
 
 form.addEventListener('submit', (e) => {
     e.preventDefault()
@@ -94,8 +97,12 @@ form.addEventListener('submit', (e) => {
         ];
         const month = months[date.getMonth()];
         const created = `${month} ${date.getDate()}, ${date.getFullYear()}`
-        const newNote = { id: Date.now(), archived: false, name: name.value, created, content: content.value, category: category.value, dates }
-        addNewNote(newNote)
+        if (edit) {
+            updateNote(edit, name.value, content.value, dates, category.value)
+        } else {
+            const newNote = { id: Date.now(), archived: false, name: name.value, created, content: content.value, category: category.value, dates }
+            addNewNote(newNote)
+        }
         name.value = ''
         content.value = ''
         category.value = 'Task'
@@ -103,5 +110,7 @@ form.addEventListener('submit', (e) => {
         displayData()
     } catch (e) {
         alert(e.message)
+    } finally {
+        edit = false
     }
 })
