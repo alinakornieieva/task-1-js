@@ -4,6 +4,7 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  background-color: #e1e5ea;
 }
 
 form {
@@ -16,6 +17,6 @@ form {
   display: block;
 }
 
-textarea {
-  margin-top: 10px;
+.archived {
+  display: none;
 }
