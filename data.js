@@ -14,7 +14,7 @@ export let data = [
     },
     {
         id: 10, archived: false, name: 'Idea 27/07/2023 - 30/07/2023', created: 'July 27, 2023', category: 'Idea',
-        content: 'It`s a content for idea', dates: '27/07/2023, 30/07/2023'
+        content: 'It`s a content for idea', dates: '27/07/2023,30/07/2023'
     },
     {
         id: 11, archived: false, name: 'Write a message', created: 'July 27, 2023', category: 'Random Thought',
