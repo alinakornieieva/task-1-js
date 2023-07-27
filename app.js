@@ -77,7 +77,23 @@ form.addEventListener('submit', (e) => {
             throw new Error('All fields should be filled')
         }
         const dates = name.value.match(/(\d{1,4}([.\-/])\d{1,2}([.\-/])\d{1,4})/g) || ""
-        const created = new Date()
+        const date = new Date()
+        const months = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+        ];
+        const month = months[date.getMonth()];
+        const created = `${month} ${date.getDate()}, ${date.getFullYear()}`
         const newNote = { id: Date.now(), archived: false, name: name.value, created, content: content.value, category: category.value, dates }
         addNewNote(newNote)
         name.value = ''
